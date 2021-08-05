@@ -316,6 +316,9 @@ li.tree-diagram__root::before {
 }
 .people .box {
     margin-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 2.75em;
 }
 .profile .details .box:first-child > div,
 .profile .details .right-top {
