@@ -28,6 +28,7 @@ function App() {
                     <Route path="/add" exact component={() => <AddPerson />} />
                     <Route path="/add/:pid" exact component={() => <AddPerson />} />
                     <Route path="/add-relative" exact component={() => <AddRelative />} />
+                    <Route path="/add-relative/:pid" exact component={() => <AddRelative />} />
                 </Switch>
                 <Footer />
             </Router>

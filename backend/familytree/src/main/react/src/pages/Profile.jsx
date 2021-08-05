@@ -69,7 +69,7 @@ function Profile() {
                     </div>
                     <div className="box">
                         <p><strong>Relatives</strong></p>
-                        <Link to={`/add/${person.pid}`}>
+                        <Link to={`/add-relative/${person.pid}`}>
                             <p>+ Add Relative</p>
                         </Link>
                     </div>

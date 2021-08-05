@@ -29,6 +29,15 @@ a {
     text-decoration: none;
     color: $color-dark;
 }
+ul,
+ol {
+    li {
+        margin-bottom: 1em;
+    }
+}
+.hidden {
+    display: none;
+}
 
 
 /* Navigation */
@@ -397,7 +406,6 @@ form {
         font-size: 20px;
     }
     input[type=text],
-    button,
     select {
         box-sizing: border-box;
         width: 100%;
@@ -414,12 +422,21 @@ form {
         font-size: 18px;
         border-bottom: solid 1px #efefef;
     }
-    button {
-        background-color: $color-medium;
-        border: none;
-        color: $color-light;
-        &:hover {
-            cursor: pointer;
-        }
+}
+button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+    outline: none;
+    &:focus {
+        outline: none;
+    }
+
+    background-color: $color-medium;
+    border: none;
+    color: $color-light;
+    font-size: 20px;
+    &:hover {
+        cursor: pointer;
     }
 }
