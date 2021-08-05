@@ -18,14 +18,12 @@ function People() {
             <Link to={`/add`}>
                 + Add Person
             </Link>
-            <div className="details">
-                <div className="box">
-                    {people.map((person) => (
-                        <Link to={`/profile/${person.pid}`}>
-                            <p><strong>{person.fname} {person.lname}</strong></p>
-                        </Link>
-                    ))}
-                </div>
+            <div className="box">
+                {people.map((person) => (
+                    <Link to={`/profile/${person.pid}`}>
+                        <p><strong>{person.fname} {person.lname}</strong></p>
+                    </Link>
+                ))}
             </div>
         </div>
     );
