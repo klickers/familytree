@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function AddRelative() {
 
@@ -61,6 +61,10 @@ function AddRelative() {
     
     return (
         <div className="addPerson">
+
+            <Link to={`/profile/${pid}`}>
+                &#x2190; Back to Profile
+            </Link>
 
             <div className={`box`}>
                 <h1>Add Relative</h1>
