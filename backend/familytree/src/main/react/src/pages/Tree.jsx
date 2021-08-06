@@ -33,6 +33,9 @@ function Tree() {
                         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
                         <div>
                             <strong>{person.fname} {person.lname}</strong><br />
+                            <Link to={`/add-relative/${person.pid}`}>
+                                <p>+ Add Relative</p>
+                            </Link>
                         </div>
                     </Link>
                     <ul>
