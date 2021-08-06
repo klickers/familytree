@@ -77,7 +77,7 @@ function Tree() {
                             </ul>
                         </li>
                         <li>
-                            <Link to={`/add/with-relative`}>
+                            <Link to={`/add-relative/${person.pid}`}>
                                 +
                             </Link>
                         </li>
