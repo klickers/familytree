@@ -61,10 +61,13 @@ function Profile() {
                 <div>
                     <div className="box right-top">
                         <Link to={`/tree/${person.pid}`}>
-                            <p>Tree</p>
+                            <p><img className="icon" src="https://img.icons8.com/windows/32/000000/tree.png"/> Tree</p>
                         </Link>
                         <Link to={`/sketch/${person.pid}`}>
-                            <p>Life Sketch</p>
+                            <p>
+                                <img className="icon" src="https://img.icons8.com/windows/32/000000/lifecycle--v1.png"/>
+                                Life Sketch
+                            </p>
                         </Link>
                     </div>
                     <div className="box">
