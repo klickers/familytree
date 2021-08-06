@@ -26,6 +26,9 @@ function Sketch() {
                 </div>
             </div>
             <div className="box">
+                <Link to={`/profile/${person.pid}`} style={{ marginBottom: '2em' }}>
+                    + Add Content
+                </Link>
                 <div className="container">
                     <div className="container__line"></div>
                     <ul className="container__items">
@@ -34,11 +37,11 @@ function Sketch() {
                             <div className="container__top">
                                 <div className="container__circle"></div>
                                 <div className="container__title">
-                                    Some Date:  Born
+                                    TITLE: DATE
                                 </div>
                             </div>
                             <div className="container__desc">
-                                something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum
+                                some long CONTENT here
                             </div>
                         </li>
 
