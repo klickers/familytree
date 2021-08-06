@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 function AddContent() {
 
@@ -41,9 +41,14 @@ function AddContent() {
   
     const { sPid, title, content, date } = state;
     return (
-        <div className="addPerson">
+        <div className="addContent">
+
+            <Link to={`/sketch/${pid}`}>
+                &#x2190; Back to Life Sketch
+            </Link>
+
             <div className="box">
-                <h1>Add Person</h1>
+                <h1>Add Content</h1>
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text" 
@@ -66,9 +71,10 @@ function AddContent() {
                         placeholder="Date"
                         value={date}  
                         onChange={handleChange} />
-                    <button type="submit">Add Content</button>
+                    <button type="submit">+ Add Content</button>
                 </form>
             </div>
+            
         </div>
     );
 }

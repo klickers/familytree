@@ -273,7 +273,8 @@ li.tree-diagram__root::before {
 .profile,
 .sketch,
 .login,
-.addPerson {
+.addPerson,
+.addContent {
     width: 75%;
     margin: 0 auto;
     padding: 2em 2em 4em 2em;
@@ -318,11 +319,20 @@ li.tree-diagram__root::before {
         font-weight: 600;
     }
 }
-.addPerson {
+.addPerson,
+.addContent {
     .box {
         margin: 0 auto;
         max-width: 350px;
         padding-bottom: 3em;
+    }
+}
+.addContent {
+    .box {
+        max-width: 600px;
+    }
+    & > a {
+        
     }
 }
 .sketch .box {
