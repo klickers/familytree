@@ -153,7 +153,7 @@ li.tree-diagram__root::before {
 }
 
 
-.tree li a,
+.tree li > a,
 .tree-diagram li a {
     img {
         width: 80px;
@@ -237,7 +237,7 @@ li.tree-diagram__root::before {
         width: 0; 
     height: 1em;
 }
-.tree li a {
+.tree li > a {
     border: $border-width solid $color-light;
     background: white;
     padding: .5em .75em;
@@ -250,16 +250,16 @@ li.tree-diagram__root::before {
         transform: rotate(180deg);
     }
 }
-.tree li a:hover,
-.tree li a:hover+ul li a {
+.tree li > a:hover,
+.tree li > a:hover+ul li a {
     background: $color;
     /* color: #fff; */
     border: $border-width solid $color;
 }
-.tree li a:hover + ul li::after, 
-.tree li a:hover + ul li::before, 
-.tree li a:hover + ul::before, 
-.tree li a:hover + ul ul::before{
+.tree li > a:hover + ul li::after, 
+.tree li > a:hover + ul li::before, 
+.tree li > a:hover + ul::before, 
+.tree li > a:hover + ul ul::before{
     border-color:  $color;
 }
 /* end of tree graph CSS */
