@@ -26,7 +26,7 @@ function Sketch() {
                 </div>
             </div>
             <div className="box">
-                <Link to={`/profile/${person.pid}`} style={{ marginBottom: '2em' }}>
+                <Link to={`/add-content/${person.pid}`} style={{ marginBottom: '2em' }}>
                     + Add Content
                 </Link>
                 <div className="container">

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ScrollToTop from './ScrollToTop'
 import { Navigation, Footer } from './components'
-import { Tree, Tree2, People, Profile, Sketch, Login, AddPerson, AddRelative } from "./pages"
+import { Tree, Tree2, People, Profile, Sketch, Login, AddPerson, AddRelative, AddContent } from "./pages"
 import './index.scss'
 
 /* import Amplify, { Auth } from 'aws-amplify';
@@ -26,7 +26,7 @@ function App() {
                     <Route path="/profile/:pid" exact component={() => <Profile />} />
                     <Route path="/sketch/:pid" exact component={() => <Sketch />} />
                     <Route path="/add" exact component={() => <AddPerson />} />
-                    <Route path="/add/:pid" exact component={() => <AddPerson />} />
+                    <Route path="/add-content/:pid" exact component={() => <AddContent />} />
                     <Route path="/add-relative" exact component={() => <AddRelative />} />
                     <Route path="/add-relative/:pid" exact component={() => <AddRelative />} />
                 </Switch>

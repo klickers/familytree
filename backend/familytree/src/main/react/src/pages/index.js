@@ -1,3 +1,4 @@
+export { default as AddContent } from "./AddContent"
 export { default as AddPerson } from "./AddPerson"
 export { default as AddRelative } from "./AddRelative"
 export { default as Tree } from "./Tree"
