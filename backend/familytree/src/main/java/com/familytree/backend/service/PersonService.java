@@ -14,6 +14,7 @@ import com.familytree.backend.model.Descendants;
 import com.familytree.backend.model.Person;
 import com.familytree.backend.model.Relatives;
 import com.familytree.backend.model.Spouses;
+import com.familytree.backend.model.lifeSketch;
 import com.familytree.backend.model.searchName;
 
 @Service
@@ -80,6 +81,14 @@ public class PersonService {
 	
 	public searchName searchPerson(searchName toFind) {
 		return personDao.searchPerson(toFind);
+	}
+	
+	public String withRelation(Person person, String relation, String relative) {
+		return personDao.insertPersonwithRelation(person, relation, relative);
+	}
+	
+	public String insertLifeSketch(String id, lifeSketch ls) {
+		return personDao.insertSketch(id, ls);
 	}
 	
 }

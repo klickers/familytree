@@ -41,4 +41,8 @@ public interface PersonDao {
 	int updatePersonById(String id, Person person);
 	
 	searchName searchPerson(searchName name);
+	
+	String insertPersonwithRelation(Person person, String relation, String relative);
+	
+	String insertSketch(String id, lifeSketch ls);
 }
