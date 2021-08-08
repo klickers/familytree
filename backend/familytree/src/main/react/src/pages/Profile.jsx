@@ -47,7 +47,7 @@ function Profile() {
     
     let content
 
-    if (person.pid == '') {
+    if (person.pid != pid) {
          content = <p>Loading...</p>;
     }
     else {
@@ -111,21 +111,21 @@ function Profile() {
                             <div className="relatives">
                                 {person.ftree.spouse[0] != null && 
                                     <div>
-                                        <Link to={`/profile/${person.ftree.spouse[0].pid}`}>
+                                        <Link to={`/profile/${person.ftree.spouse[0].pid}`} target="_blank">
                                             <p><strong>{person.ftree.spouse[0].fname} {person.ftree.spouse[0].lname}</strong> (spouse)</p>
                                         </Link>
                                     </div>
                                 }
                                 {person.ftree.father[0] != null && 
                                     <div>
-                                        <Link to={`/profile/${person.ftree.father[0].pid}`}>
+                                        <Link to={`/profile/${person.ftree.father[0].pid}`} target="_blank">
                                             <p><strong>{person.ftree.father[0].fname} {person.ftree.father[0].lname}</strong> (father)</p>
                                         </Link>
                                     </div>
                                 }
                                 {person.ftree.mother[0] != null && 
                                     <div>
-                                        <Link to={`/profile/${person.ftree.mother[0].pid}`}>
+                                        <Link to={`/profile/${person.ftree.mother[0].pid}`} target="_blank">
                                             <p><strong>{person.ftree.mother[0].fname} {person.ftree.mother[0].lname}</strong> (mother)</p>
                                         </Link>
                                     </div>
