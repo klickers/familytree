@@ -14,12 +14,12 @@ function Tree() {
                 setPerson(result)
                 console.log(result)  // get rid of
             })
-        fetch(`/api/v1/person/${pid}/ancestors`)
+        /* fetch(`/api/v1/person/${pid}/ancestors`)
             .then(res => res.json())
             .then((result) => {
                 setAncestors(result)
                 console.log(result)  // get rid of
-            })
+            }) */
     }, [])
     
     
@@ -58,26 +58,6 @@ function Tree() {
                                     Parent
                                 </div>
                             </Link>
-                            <ul>
-                                <li>
-                                    <Link to={`/profile/---`}>
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
-                                        <div>
-                                            <strong>MW SA</strong><br />
-                                            Parent
-                                        </div>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to={`/profile/---`}>
-                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" />
-                                        <div>
-                                            <strong>MW SA</strong><br />
-                                            Parent
-                                        </div>
-                                    </Link>
-                                </li>
-                            </ul>
                         </li>
                         <li>
                             <Link to={`/add-relative/${person.pid}`}>
