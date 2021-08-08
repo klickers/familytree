@@ -332,7 +332,7 @@ li.tree-diagram__root::before {
         max-width: 600px;
     }
     & > a {
-        
+
     }
 }
 .sketch .box {
@@ -430,6 +430,8 @@ form {
         font-size: 20px;
     }
     input[type=text],
+    input[type=file],
+    textarea,
     select {
         box-sizing: border-box;
         width: 100%;
@@ -440,6 +442,8 @@ form {
         }
     }
     input[type=text],
+    input[type=file],
+    textarea,
     select {
         border: 1px solid $color;
         width: 100%;
