@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 import com.familytree.backend.model.Person;
 
 @Repository("fakeDao")
-public class FakePersonDataAccessService implements PersonDao{
-
+public class FakePersonDataAccessService{
+/*
 	private static List<Person> DB = new ArrayList<>();
 	
 	@Override
@@ -58,4 +58,12 @@ public class FakePersonDataAccessService implements PersonDao{
 				})
 				.orElse(0);
 	}
+
+	@Override
+	public int insertAncestor(String id, Person person) {
+		// TODO Auto-generated method stub
+		return 0;
+	
+	}
+*/
 }

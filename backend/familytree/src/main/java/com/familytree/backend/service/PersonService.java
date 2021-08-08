@@ -12,6 +12,7 @@ import com.familytree.backend.dao.PersonDao;
 import com.familytree.backend.model.Ancestors;
 import com.familytree.backend.model.Descendants;
 import com.familytree.backend.model.Person;
+import com.familytree.backend.model.Relatives;
 import com.familytree.backend.model.Spouses;
 
 @Service
@@ -26,34 +27,34 @@ public class PersonService {
 		this.d = d;
 	}
 	
-	public int addPerson(Person person) {
+	public String addPerson(Person person) {
 		//System.out.println("From personService: " + person.getName());
 		return personDao.insertPerson(person);
 		
 	}
 	
 	public int addAncestor(String s, Ancestors a) {
-		return d.insertDAS(s, a);
+		return personDao.insertAncestor(s, a);
 	}
 	
 	public List<Ancestors> selectAllAncestors(String s) {
-		return d.selectAllAncestorsById(s);
+		return personDao.selectAllAncestorsById(s);
 	}
 	
 	public int addDescendant(String s, Descendants da) {
-		return d.insertDAS(s, da);
+		return personDao.insertDescendant(s, da);
 	}
 	
 	public List<Descendants> selectAllDescendants(String s) {
-		return d.selectAllDescendantsById(s);
+		return personDao.selectAllDescendantsById(s);
 	}
 	
 	public int addSpouse(String s, Spouses sp) {
-		return d.insertDAS(s, sp);
+		return personDao.insertSpouse(s, sp);
 	}
 	
 	public List<Spouses> selectAllSpouses(String s) {
-		return d.selectAllSpousesById(s);
+		return personDao.selectAllSpousesById(s);
 	}
 	
 	public List<Person> getAllPeople() {
@@ -70,5 +71,9 @@ public class PersonService {
 	
 	public int updatePerson(String id, Person newPerson) {
 		return personDao.updatePersonById(id, newPerson);
+	}
+	
+	public Relatives getTree(String pid) {
+		return personDao.selectFamilyTree(pid);
 	}
 }
