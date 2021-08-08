@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.familytree.backend.model.Ancestors;
-import com.familytree.backend.model.Descendants;
-import com.familytree.backend.model.Person;
-import com.familytree.backend.model.Spouses;
+import com.familytree.backend.model.*;
 import com.familytree.backend.service.PersonService;
 
 @RequestMapping("api/v1/person")
@@ -33,24 +30,24 @@ public class PersonController {
 	}
 	
 	@PostMapping
-	public void addPerson(@RequestBody Person person) {
+	public String addPerson(@RequestBody Person person) {
 		//System.out.println("From personController: " + person.getName());
-		personService.addPerson(person);
+		return personService.addPerson(person);
 	}
 	
-	@PostMapping(path = "{pid}/ancestors") 
+	@PostMapping(path = "ancestors/{pid}") 
 	public void addAncestor(@PathVariable("pid") String pid, @RequestBody Ancestors ancestor) {
 		//System.out.println("From personController: " + person.getName());
 		personService.addAncestor(pid, ancestor);
 	}
 	
-	@PostMapping(path = "{pid}/descendants") 
+	@PostMapping(path = "descendants/{pid}") 
 	public void addDescendant(@PathVariable("pid") String pid, @RequestBody Descendants descendant) {
 		//System.out.println("From personController: " + person.getName());
 		personService.addDescendant(pid, descendant);
 	}
 	
-	@PostMapping(path = "{pid}/spouses") 
+	@PostMapping(path = "spouses/{pid}") 
 	public void addSpouse(@PathVariable("pid") String pid, @RequestBody Spouses spouse) {
 		//System.out.println("From personController: " + person.getName());
 		personService.addSpouse(pid, spouse);
@@ -66,19 +63,29 @@ public class PersonController {
 		return personService.getPersonById(id).orElse(null);
 	}
 	
-	@GetMapping(path = "{pid}/ancestors")
+	@GetMapping(path = "ancestors/{pid}")
 	public List<Ancestors> getAncestorsById(@PathVariable("pid")String id) {
 		return personService.selectAllAncestors(id);
 	}
 	
-	@GetMapping(path = "{pid}/descendants")
+	@GetMapping(path = "descendants/{pid}")
 	public List<Descendants> getDescendantsById(@PathVariable("pid")String id) {
 		return personService.selectAllDescendants(id);
 	}
 	
-	@GetMapping(path = "{pid}/spouses")
+	@GetMapping(path = "spouses/{pid}")
 	public List<Spouses> getSpousesById(@PathVariable("pid")String id) {
 		return personService.selectAllSpouses(id);
+	}
+	
+	@GetMapping(path = "relatives/{pid}")
+	public Relatives getTree(@PathVariable("pid")String id) {
+		return personService.getTree(id);
+	}
+	
+	@GetMapping(path = "exists") 
+	public searchName searchPerson(@RequestBody searchName names) {
+		return personService.searchPerson(names);
 	}
 	
 	@DeleteMapping(path = "{pid}")

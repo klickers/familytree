@@ -9,7 +9,7 @@ public class Descendants {
 	@Id
 	private String dID;
 	
-	private String pID;
+	//private String pID;
 	
 	private String dGender;
 	
@@ -19,9 +19,9 @@ public class Descendants {
 		super();
 	}
 	
-	public Descendants(String dID, String pID, String dGender, String relation) {
+	public Descendants(String dID, String dGender, String relation) {
 		this.dID = dID;
-		this.setpID(pID);
+		//this.setpID(pID);
 		this.dGender = dGender;
 		this.setRelation(relation);
 	}
@@ -41,7 +41,7 @@ public class Descendants {
 	public void setdGender(String dGender) {
 		this.dGender = dGender;
 	}
-
+/*
 	public String getpID() {
 		return pID;
 	}
@@ -49,7 +49,7 @@ public class Descendants {
 	public void setpID(String pID) {
 		this.pID = pID;
 	}
-
+*/
 	public String getRelation() {
 		return relation;
 	}
