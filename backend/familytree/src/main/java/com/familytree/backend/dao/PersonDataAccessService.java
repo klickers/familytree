@@ -290,17 +290,14 @@ public class PersonDataAccessService implements PersonDao {
 			
 			if(f.equals(fonL) && l.equals(lonL)) {
 				fandl.add(p);
-				continue;
 			}
 			
-			if(f.equals(fonL)) {
+			else if(f.equals(fonL)) {
 				fonly.add(p);
-				continue;
 			}
 			
-			if(l.equals(lonL)) {
+			else if(l.equals(lonL)) {
 				lonly.add(p);
-				continue;
 			}
 			
 		}
@@ -309,6 +306,76 @@ public class PersonDataAccessService implements PersonDao {
 		s.setFmatches(fonly);
 		s.setLmatches(lonly);
 		return s;
+	}
+
+	@Override
+	public String insertPersonwithRelation(Person person, String relation, String relative) {
+		
+		String insertedPerson = insertPerson(person.getPID(), person);
+		
+		String reLow = relation.toLowerCase();
+		
+		if(reLow.equals("grandfather") || reLow.equals("grandmother") || reLow.equals("mother") || reLow.equals("father")) {
+			
+			Ancestors a = new Ancestors();
+			a.setRelation(relation);
+			a.setaID(relative);
+			int iA = insertAncestor(person.getPID(), a);
+			
+			if(iA == 0)
+				return insertedPerson + "\n" + "Failed : Ancestor profile absent, create ancestor profile first";
+			else
+				return insertedPerson + "\n" + "Successfully inserted ancestor";
+			
+		}
+		
+		else if(reLow.equals("children") || reLow.equals("grandchildren")) {
+			
+			Descendants d = new Descendants();
+			d.setRelation(relation);
+			d.setdID(relative);
+			int iD = insertDescendant(person.getPID(), d);
+			
+			if(iD == 0)
+				return insertedPerson + "\n" + "Failed : Descendant profile absent, create descendant profile first";
+			else
+				return insertedPerson + "\n" + "Successfully inserted descendant";
+			
+		}
+
+		else if(reLow.equals("spouse")) {
+			
+			Spouses s = new Spouses();
+			s.setRelation(relation);
+			s.setsID(relative);
+			int iS = insertSpouse(person.getPID(), s);
+			
+			if(iS == 0)
+				return insertedPerson + "\n" + "Failed : Spouse profile absent, create spouse profile first";
+			else
+				return insertedPerson + "\n" + "Successfully inserted spouse";
+			
+		}
+		
+		else 
+			return insertedPerson + "\n" + "Invalid relation";
+	}
+
+	@Override
+	public String insertSketch(String id, lifeSketch ls) {
+		
+		Optional<Person> p = selectPersonById(id);
+		
+		if(p.isEmpty())
+			return "Failed: person does not exist, create person first";
+		
+		Person act = p.get();
+		
+		act.getlSketch().add(ls);
+		
+		userRepository.save(act);
+		
+		return "Successfully added sketch";
 	}
 
 

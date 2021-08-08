@@ -49,6 +49,10 @@ public class Person {
 	@JoinColumn(name = "p_id", referencedColumnName = "pID")
 	List<Spouses> spouses = new ArrayList<>();
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "m_id", referencedColumnName = "mID")
+	List<lifeSketch> lSketch = new ArrayList<>();
+	
 	public Person(){
 		super();
 	}
@@ -148,5 +152,13 @@ public class Person {
 	
 	public void setLod(String lod) {
 		this.lod = lod;
+	}
+
+	public List<lifeSketch> getlSketch() {
+		return lSketch;
+	}
+
+	public void setlSketch(List<lifeSketch> lSketch) {
+		this.lSketch = lSketch;
 	}
 }
