@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@400;600;700&display=swap');
+
+$border-width: 1px;
+$reverse: true;
+$color-graph: #ccc;
+$color: #d8e2dc;
+$color-dark: #3d634c;
+$color-medium: #6a9179;
+$color-light: #e7eeea;
+
+$display-font: 'Encode Sans SC', sans-serif;
+
+
+/* ====================================
+ * Core Styles
+ * ==================================== */
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+body {
+    font-size: 20px;
+    padding: 8em 0 0 0;
+    margin: 0;
+    background: $color-light;
+}
+a {
+    text-decoration: none;
+    color: $color-dark;
+}
+ul,
+ol {
+    li {
+        margin-bottom: 1em;
+    }
+}
+.hidden {
+    display: none;
+}
+.icon {
+    margin-bottom: -8px;
+    margin-right: 4px;
+}
+
+
+/* Navigation */
+nav {
+    position: fixed;
+    width: 100%;
+    margin: 0px;
+    margin-top: -8.25em;
+    padding: .5em 1em;
+    background: white;
+    z-index: 100;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+    text-transform: uppercase;
+    
+    ul {
+        li {
+            list-style: none;
+            display: inline-block;
+            margin-right: 2em;
+            margin-bottom: 0;
+        }
+    }
+}
+
+/* Footer */
+footer {
+    padding: 2em 3em;
+    margin-top: 4em;
+    text-align: center;
+    background: white;
+    box-shadow: rgba(126, 109, 109, 0.16) 0px 1px 4px;
+}
+
+
+/* ====================================
+ * Tree Styles
+ * ==================================== */
+.tree-diagram ul {
+    display: flex;
+    position: relative;
+
+    /* Reset */
+    list-style-type: none;
+    margin: 0;
+    padding: 1rem 0.5rem 0rem 0.5rem;
+}
+.tree-diagram ul ul::before {
+    border-right: $border-width solid $color-graph;
+    content: '';
+    
+    /* Position */
+    position: absolute;
+    top: 0;
+    right: 50%;
+
+    /* Size */
+    height: 1rem;
+    width: 50%;
+}
+.tree-diagram li {
+    padding: 1rem 0.5rem 0rem 0.5rem;
+    position: relative;
+
+    /* Center the content */
+    align-items: center;
+    display: flex;    
+    flex-direction: column;
+
+    /* child */
+    a {
+        border: $border-width solid $color-graph;
+    }
+}
+.tree-diagram li::before {
+    border-right: $border-width solid $color-graph;
+    border-top: $border-width solid $color-graph;
+    content: '';    
+
+    /* Position */
+    position: absolute;
+    top: 0;
+    right: 50%;
+
+    /* Size */
+    height: 1rem;
+    width: 50%;
+}
+.tree-diagram li::after {
+    border-top: $border-width solid $color-graph;
+    content: '';
+
+    /* Position */
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    /* Size */
+    width: 50%;
+}
+.tree-diagram li:first-child::before,
+.tree-diagram li:last-child::after {
+    /* Remove the top of border from the first and last items */
+    border-top: none;
+}
+/* Add a root item if you want */
+li.tree-diagram__root::before {
+    border-right: none;
+}
+
+
+.tree li > a,
+.tree-diagram li a {
+    img {
+        width: 80px;
+        display: block;
+        margin: 0 auto;
+        margin: .75em auto 1em auto;
+        border-radius: 100%;
+    }
+    div {
+        margin: .5em .75em;
+    }
+}
+
+
+/* Tree graph CSS based on https://codepen.io/philippkuehn/pen/QbrOaN */
+.tree {
+    @if $reverse {
+        transform: rotate(180deg);
+        transform-origin: 50%;
+    }
+}
+.tree ul {
+    position: relative;
+    padding: 1em 0; 
+    white-space: nowrap;
+    margin: 0 auto;
+    text-align: center;
+    &::after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+.tree li {
+    display: inline-block; // need white-space fix
+    vertical-align: top;
+    text-align: center;
+        list-style-type: none;
+        position: relative;
+        padding: 1em .5em 0 .5em;
+    &::before,
+    &::after {
+        content: '';
+        position: absolute; 
+        top: 0; 
+        right: 50%;
+        border-top: $border-width solid $color-graph;
+        width: 50%; 
+        height: 1em;
+    }
+    &::after {
+        right: auto; 
+        left: 50%;
+        border-left: $border-width solid $color-graph;
+    }
+    &:only-child::after,
+    &:only-child::before {
+        display: none;
+    }
+    &:only-child {
+        padding-top: 0;
+    }
+    &:first-child::before,
+    &:last-child::after {
+        border: 0 none;
+    }
+    &:last-child::before{
+        border-right: $border-width solid $color-graph;
+        /* border-radius: 0 5px 0 0; */
+    }
+    &:first-child::after{
+        /* border-radius: 5px 0 0 0; */
+    }
+}
+.tree ul ul::before{
+    content: '';
+    position: absolute; 
+    top: 0; 
+    left: 50%;
+        border-left: $border-width solid $color-graph;
+        width: 0; 
+    height: 1em;
+}
+.tree li > a {
+    border: $border-width solid $color-light;
+    background: white;
+    padding: .5em .75em;
+    display: inline-block;
+    /* border-radius: 5px; */
+    color: #333;
+    position: relative;
+    top: $border-width;
+    @if $reverse {
+        transform: rotate(180deg);
+    }
+}
+.tree li > a:hover,
+.tree li > a:hover+ul li a {
+    background: $color;
+    /* color: #fff; */
+    border: $border-width solid $color;
+}
+.tree li > a:hover + ul li::after, 
+.tree li > a:hover + ul li::before, 
+.tree li > a:hover + ul::before, 
+.tree li > a:hover + ul ul::before{
+    border-color:  $color;
+}
+/* end of tree graph CSS */
+
+
+
+/* ====================================
+ * People / Sketch / Login / Add Styles
+ * ==================================== */
+.people,
+.profile,
+.sketch,
+.login,
+.addPerson,
+.addContent {
+    width: 75%;
+    margin: 0 auto;
+    padding: 2em 2em 4em 2em;
+    & > a {
+        text-decoration: none;
+    }
+}
+.profile-banner {
+    margin: 2em auto;
+    display: flex;
+    background: white;
+
+    div {
+        padding: 2em 3em 1em 3em;
+        min-width: 200px;
+        margin: 0 auto;
+        img {
+            height: 100px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 100%;
+        }
+        p {
+            font-family: $display-font;
+            font-weight: bold;
+            font-size: 1.25em;
+            text-align: center;
+        }
+    }
+}
+.box {
+    background: white;
+    padding: 1em 2em;
+    margin-bottom: 2em;
+}
+.details {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2.75em;
+    strong {
+        font-weight: 600;
+    }
+}
+.addPerson,
+.addContent {
+    .box {
+        margin: 0 auto;
+        max-width: 350px;
+        padding-bottom: 3em;
+    }
+}
+.addContent {
+    .box {
+        max-width: 600px;
+    }
+    & > a {
+
+    }
+}
+.sketch .box {
+    padding: 3em 3em 2em 3em;
+}
+.people .box {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 2.75em;
+}
+.profile .details .box:first-child > div,
+.profile .details .right-top {
+    display: flex;
+    & > p,
+    & > a {
+        width: 50%;
+    }
+}
+.profile .right-top {
+    text-transform: uppercase;
+}
+
+
+/* Sketch Timeline CSS */
+/* built off https://csslayout.io/patterns/timeline/ */
+.container {
+    /* Used to position the left vertical line */
+    position: relative;
+    margin-top: 2em;
+}
+.container__line {
+    /* Border */
+    border-right: 2px solid #aaa;
+
+    /* Positioned at the left */
+    left: 7px;
+    position: absolute;
+    top: 0px;
+
+    /* Take full height */
+    height: 100%;
+}
+.container__items {
+    /* Reset styles */
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+.container__item {
+    margin-bottom: 16px;
+}
+.container__top {
+    /* Center the content horizontally */
+    align-items: center;
+    display: flex;
+}
+.container__circle {
+    /* Rounded border */
+    background-color: rgb(170, 170, 170);
+    border-radius: 9999px;
+
+    /* Size */
+    height: 16px;
+    width: 16px;
+}
+.container__title {
+    /* Take available width */
+    flex: 1;
+    margin-left: 1em;
+    font-weight: bold;
+
+    /* Styling */
+    padding: 10px 1em;
+    border-radius: 20px;
+    background: $color-light;
+    width: auto;
+    margin-bottom: 1em;
+    margin-top: 2em;
+}
+.container__desc {
+    /* Make it align with the title */
+    margin-left: 2em;
+}
+
+
+
+/* ====================================
+ * Form Styles
+ * ==================================== */
+form {
+    box-sizing: content-box;
+    width: 100%;
+    & > * {
+        font-size: 20px;
+    }
+    input[type=text],
+    input[type=file],
+    textarea,
+    select {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1em;
+        outline: none;
+        &:focus {
+            outline: none;
+        }
+    }
+    input[type=text],
+    input[type=file],
+    textarea,
+    select {
+        border: 1px solid $color;
+        width: 100%;
+        font-size: 18px;
+        border-bottom: solid 1px #efefef;
+    }
+}
+button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1em;
+    outline: none;
+    &:focus {
+        outline: none;
+    }
+
+    background-color: $color-medium;
+    border: none;
+    color: $color-light;
+    font-size: 20px;
+    &:hover {
+        cursor: pointer;
+    }
+}

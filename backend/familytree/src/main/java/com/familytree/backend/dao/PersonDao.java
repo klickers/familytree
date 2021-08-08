@@ -1,24 +1,23 @@
 package com.familytree.backend.dao;
 
-import com.familytree.backend.model.*;
+import com.familytree.backend.model.Person;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.data.jpa.repository.Query;
 
 public interface PersonDao {
 	
-	String insertPerson(String id, Person person);
+	int insertPerson(String id, Person person);
 	
-	int insertAncestor(String id, Ancestors a);
+	//int insertAncestor(String id, Person person);
 	
-	int insertDescendant(String id, Descendants d);
+	//int insertDescendant(String id, Person person);
 	
-	int insertSpouse(String id, Spouses s);
+	//int insertSpouse(String id, Person person);
 	
-	default String insertPerson(Person person) {
+	default int insertPerson(Person person) {
 		//System.out.println("From personDao: " + person.getName());
 		//String id = RandomStringUtils.randomAlphanumeric(5);
 		return insertPerson(person.getPID(), person);
@@ -26,15 +25,7 @@ public interface PersonDao {
 	
 	List<Person> selectAllPeople();
 	
-	Relatives selectFamilyTree(String pid);
-	
 	Optional<Person> selectPersonById(String id);
-	
-	List<Ancestors> selectAllAncestorsById(String id);
-	
-	List<Descendants> selectAllDescendantsById(String id);
-	
-	List<Spouses> selectAllSpousesById(String id);
 	
 	int deletePersonById(String id);
 	

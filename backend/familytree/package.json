@@ -1,0 +1,19 @@
+{
+  "name": "spring-react-app",
+  "description": "Sample application using React with Spring Boot",
+  "dependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^0.28.11",
+    "node-sass": "^4.8.3",
+    "react": "~17.0.1",
+    "react-dom": "~17.0.1",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.5.0"
+  },
+  "devDependencies": {}
+}

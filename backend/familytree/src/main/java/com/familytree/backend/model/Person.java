@@ -37,17 +37,17 @@ public class Person {
 	
 	private String lod;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "p_id", referencedColumnName = "pID")
-	List<Ancestors> ancestors = new ArrayList<>();
+	//@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "p_id", referencedColumnName = "pID")
+	//List<Ancestors> ancestors = new ArrayList<>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "p_id", referencedColumnName = "pID")
-	List<Descendants> descendants  = new ArrayList<>();
+	//@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "p_id", referencedColumnName = "pID")
+	//List<Descendants> descendants  = new ArrayList<>();
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "p_id", referencedColumnName = "pID")
-	List<Spouses> spouses = new ArrayList<>();
+	//@OneToMany(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "p_id", referencedColumnName = "pID")
+	//List<Spouses> spouses = new ArrayList<>();
 	
 	public Person(){
 		super();
@@ -104,7 +104,7 @@ public class Person {
 	public String getLod() {
 		return lod;
 	}
-	
+	/*
 	public List<Ancestors> getAncestors(){
 		return ancestors;
 	}
@@ -117,7 +117,7 @@ public class Person {
 		return spouses;
 	}
 	
-	/*
+	
 	public void setPID(String pID) {
 		this.pID = pID;
 	}*/

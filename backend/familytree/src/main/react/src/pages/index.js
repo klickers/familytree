@@ -1,0 +1,8 @@
+export { default as AddContent } from "./AddContent"
+export { default as AddPerson } from "./AddPerson"
+export { default as AddRelative } from "./AddRelative"
+export { default as Tree } from "./Tree"
+export { default as Tree2 } from "./Tree2"
+export { default as People } from "./People"
+export { default as Profile } from "./Profile"
+export { default as Sketch } from "./Sketch"
