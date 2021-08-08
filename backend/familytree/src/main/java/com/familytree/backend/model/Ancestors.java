@@ -9,7 +9,7 @@ public class Ancestors {
 	@Id
 	private String aID;
 	
-	//private String pID;
+	private String pID;
 	
 	private String aGender;
 	
@@ -19,8 +19,9 @@ public class Ancestors {
 		super();
 	}
 	
-	public Ancestors(String aID, String aGender, String relation) {
+	public Ancestors(String aID, String pID, String aGender, String relation) {
 		this.aID = aID;
+		this.pID = pID;
 		this.aGender = aGender;
 		this.relation = relation;
 	}
@@ -39,6 +40,14 @@ public class Ancestors {
 
 	public void setaGender(String aGender) {
 		this.aGender = aGender;
+	}
+
+	public String getpID() {
+		return pID;
+	}
+
+	public void setpID(String pID) {
+		this.pID = pID;
 	}
 
 	public String getRelation() {

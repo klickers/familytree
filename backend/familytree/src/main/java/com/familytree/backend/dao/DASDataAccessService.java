@@ -23,14 +23,12 @@ public class DASDataAccessService implements DASDao{
 	
 	@Autowired
 	private AncestorRepository ancestorRepo;
-	/*
+
 	@Override
 	public int insertDAS(String id, Ancestors a) {
 		// TODO Auto-generated method stub
-		/*
 		Ancestors temp = new Ancestors(a.getaID(), id, a.getaGender(), a.getRelation());
-		ancestorRepo.save(temp);
-		
+		ancestorRepo.save(temp); 
 		return 1;
 	}
 
@@ -49,7 +47,7 @@ public class DASDataAccessService implements DASDao{
 		spouseRepo.save(temp); 
 		return 1;
 	}
-*/
+
 	@Override
 	public List<Ancestors> selectAllAncestorsById(String id) {
 		// TODO Auto-generated method stub
@@ -58,12 +56,10 @@ public class DASDataAccessService implements DASDao{
 		
 		if(temp == null)
 			return null;
-		/*
+		
 		return temp.stream()
 				.filter(ancestors -> ancestors.getpID().equals(id))
 				.collect(Collectors.toList());
-		*/
-		return null;
 	}
 
 	@Override
@@ -74,10 +70,9 @@ public class DASDataAccessService implements DASDao{
 		if(temp == null)
 			return null;
 		
-		/*return temp.stream()
+		return temp.stream()
 				.filter(descendants -> descendants.getpID().equals(id))
-				.collect(Collectors.toList());*/
-		return null;
+				.collect(Collectors.toList());
 	}
 
 	@Override
@@ -87,10 +82,9 @@ public class DASDataAccessService implements DASDao{
 		
 		if(temp == null)
 			return null;
-		/*
+		
 		return temp.stream()
 				.filter(spouses -> spouses.getpID().equals(id))
-			.collect(Collectors.toList());*/
-		return null;
+				.collect(Collectors.toList());
 	}
 }

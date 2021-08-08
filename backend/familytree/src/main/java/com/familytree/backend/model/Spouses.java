@@ -9,7 +9,7 @@ public class Spouses {
 	@Id
 	private String sID;
 	
-	//private String pID;
+	private String pID;
 	
 	private String sGender;
 	
@@ -19,8 +19,9 @@ public class Spouses {
 		super();
 	}
 	
-	public Spouses(String sID, String sGender, String relation) {
+	public Spouses(String sID, String pID, String sGender, String relation) {
 		this.sID = sID;
+		this.setpID(pID);
 		this.sGender = sGender;
 		this.setRelation(relation);
 	}
@@ -40,7 +41,7 @@ public class Spouses {
 	public void setsGender(String sGender) {
 		this.sGender = sGender;
 	}
-/*
+
 	public String getpID() {
 		return pID;
 	}
@@ -48,7 +49,7 @@ public class Spouses {
 	public void setpID(String pID) {
 		this.pID = pID;
 	}
-*/
+
 	public String getRelation() {
 		return relation;
 	}
