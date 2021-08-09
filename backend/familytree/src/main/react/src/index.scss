@@ -274,7 +274,8 @@ li.tree-diagram__root::before {
 .sketch,
 .login,
 .addPerson,
-.addContent {
+.addContent,
+.viewProfile {
     width: 75%;
     margin: 0 auto;
     padding: 2em 2em 4em 2em;
@@ -354,6 +355,9 @@ li.tree-diagram__root::before {
 }
 .profile .right-top {
     text-transform: uppercase;
+}
+.viewProfile {
+    padding-bottom: 0em;
 }
 
 
