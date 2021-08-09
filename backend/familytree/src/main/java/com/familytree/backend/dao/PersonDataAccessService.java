@@ -20,6 +20,9 @@ public class PersonDataAccessService implements PersonDao {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserRepository uR2;
 
 	@Autowired
 	private AncestorRepository aR;
@@ -96,6 +99,8 @@ public class PersonDataAccessService implements PersonDao {
 		
 		Person act = p.get();
 		
+		//String laterId = act.getPID();
+		
 		Person forDes = aP.get();
 		
 		act.getAncestors().add(a);
@@ -104,7 +109,19 @@ public class PersonDataAccessService implements PersonDao {
 		
 		forDes.getDescendants().add(new Descendants(act.getPID(), "", "children"));
 		
-		userRepository.save(forDes);
+		uR2.save(forDes);
+	
+		/*
+		p = selectPersonById(a.getaID());
+		
+		if(p.isEmpty())
+			return 0;
+		
+		act = p.get();
+		
+		act.getDescendants().add(new Descendants(laterId, "" , "children"));
+		
+		*/
 		
 		return 1;
 
@@ -117,13 +134,13 @@ public class PersonDataAccessService implements PersonDao {
 		
 		ArrayList<String> famStr = new ArrayList<String>();
 		
-		famStr.add(0, "grandfather");
-		famStr.add(1, "grandmother");
-		famStr.add(2, "father");
-		famStr.add(3, "mother");
-		famStr.add(4, "spouse");
-		famStr.add(5, "children");
-		famStr.add(6, "grandchildren");
+		//famStr.add(0, "grandfather");
+		//famStr.add(1, "grandmother");
+		famStr.add(0, "father");
+		famStr.add(1, "mother");
+		famStr.add(2, "spouse");
+		famStr.add(3, "children");
+		//famStr.add(6, "grandchildren");
 		
 		Optional<Person> p = selectPersonById(pid);
 		
@@ -157,7 +174,7 @@ public class PersonDataAccessService implements PersonDao {
 		
 		HashMap<String, HashMap<Integer, Person>> treeTemplate = new HashMap<String, HashMap<Integer, Person>>();
 		
-		for(int idx = 0; idx < 7; idx++) {
+		for(int idx = 0; idx < 4; idx++) {
 			
 			String temp1 = famStr.get(idx);
 			HashMap<Integer, Person> tempMap = new HashMap<Integer, Person>();
@@ -172,6 +189,24 @@ public class PersonDataAccessService implements PersonDao {
 					if(temp1.equals(i.getRelation())) {
 						tempMap.put(k, newP.get());
 						k++;
+						
+						List<Ancestors> grandp = selectAllAncestorsById(newP.get().getPID());
+						
+						for(Ancestors ga : grandp) {
+							
+							Optional<Person> tempGP = selectPersonById(ga.getaID());
+							if(tempGP.isPresent()) {
+								
+								if(tempGP.get().getGender().toLowerCase().equals("male"))
+									tempMap.put(1, tempGP.get());
+								
+								if(tempGP.get().getGender().toLowerCase().equals("female"))
+									tempMap.put(2, tempGP.get());
+								
+							}
+							
+						}
+						
 					}		
 				}
 			}
@@ -225,19 +260,30 @@ public class PersonDataAccessService implements PersonDao {
 		
 		Person act = p.get();
 		
+		//String laterId = act.getPID();
+		String gender = act.getGender().toLowerCase();
+		
 		Person forAnc = aD.get();
 		
 		act.getDescendants().add(d);
 		
 		userRepository.save(act);
+		/*
+		p = selectPersonById(d.getdID());
 		
-		if(act.getGender().toLowerCase().equals("male"))
+		if(p.isEmpty())
+			return 0;
+		
+		act = p.get();
+		*/
+		
+		if(gender.equals("male"))
 			forAnc.getAncestors().add(new Ancestors(act.getPID(), "", "father"));
 		
-		if(act.getGender().toLowerCase().equals("female"))
+		if(gender.equals("female"))
 			forAnc.getAncestors().add(new Ancestors(act.getPID(), "", "mother"));
 		
-		userRepository.save(forAnc);
+		uR2.save(act);
 		
 		return 1;
 	}
