@@ -140,9 +140,6 @@ function Profile() {
 
     return (
         <div className="profile">
-            <Link to={`/tree/${pid}`}>
-                &#x2190; View Tree
-            </Link>
             {content}
         </div>
     );
