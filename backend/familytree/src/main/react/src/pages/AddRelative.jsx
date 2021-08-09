@@ -90,7 +90,7 @@ function AddRelative() {
             .then(res => res.text())
             .then((response) => {
                     console.log(response)
-                    window.location.href = '/profile/' . pid
+                    window.location.href = `/profile/${pid}`
                 });
         }
         else if (state.relation == 'spouse') 
@@ -111,7 +111,7 @@ function AddRelative() {
             .then(res => res.text())
             .then((response) => {
                     console.log(response)
-                    window.location.href = '/profile/' . pid
+                    window.location.href = `/profile/${pid}`
                 });
         }
         else if (state.relation == 'children') // || state.relation == 'grandchildren') 
@@ -132,7 +132,7 @@ function AddRelative() {
             .then(res => res.text())
             .then((response) => {
                     console.log(response)
-                    window.location.href = '/profile/' . pid
+                    //window.location.href = `/profile/${pid}`
                 });
         }
     }
@@ -172,7 +172,7 @@ function AddRelative() {
 
                 console.log(newPid)
                 addExistingRelation(newPid)
-                window.location.href = '/profile/' . pid
+                window.location.href = `/profile/${pid}`
             });
 
         event.preventDefault();
