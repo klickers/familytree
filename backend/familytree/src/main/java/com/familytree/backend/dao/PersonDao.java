@@ -36,6 +36,8 @@ public interface PersonDao {
 	
 	List<Spouses> selectAllSpousesById(String id);
 	
+	List<lifeSketch> selectAllLsById(String id);
+	
 	int deletePersonById(String id);
 	
 	int updatePersonById(String id, Person person);

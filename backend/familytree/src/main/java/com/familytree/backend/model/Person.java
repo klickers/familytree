@@ -50,7 +50,7 @@ public class Person {
 	List<Spouses> spouses = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "m_id", referencedColumnName = "mID")
+	@JoinColumn(name = "p_id", referencedColumnName = "pID")
 	List<lifeSketch> lSketch = new ArrayList<>();
 	
 	public Person(){

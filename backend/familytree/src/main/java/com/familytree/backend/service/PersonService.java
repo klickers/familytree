@@ -91,4 +91,8 @@ public class PersonService {
 		return personDao.insertSketch(id, ls);
 	}
 	
+	public List<lifeSketch> getLifeSketch(String id){
+		return personDao.selectAllLsById(id);
+	}
+	
 }

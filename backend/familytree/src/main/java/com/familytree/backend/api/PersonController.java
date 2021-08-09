@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.familytree.backend.model.*;
@@ -72,9 +73,15 @@ public class PersonController {
 		return personService.withRelation(person, relation, relative);
 	}
 	
-	@PostMapping(path = "lifesketch/{pid}") 
+	@PostMapping(path = "lifesketch/{pid}")
+	@ResponseBody
 	public String addSketch(@PathVariable("pid") String pid, @RequestBody lifeSketch ls) {
 		return personService.insertLifeSketch(pid, ls);
+	}
+	
+	@PostMapping(path = "exists") 
+	public searchName searchPerson(@RequestBody searchName names) {
+		return personService.searchPerson(names);
 	}
 	
 	@GetMapping
@@ -107,9 +114,9 @@ public class PersonController {
 		return personService.getTree(id);
 	}
 	
-	@GetMapping(path = "exists") 
-	public searchName searchPerson(@RequestBody searchName names) {
-		return personService.searchPerson(names);
+	@GetMapping(path = "lifesketch/{pid}")
+	public List<lifeSketch> getLifeSketch(@PathVariable("pid") String id){
+		return personService.getLifeSketch(id);
 	}
 	
 	@DeleteMapping(path = "{pid}")
