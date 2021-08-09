@@ -86,15 +86,25 @@ public class PersonDataAccessService implements PersonDao {
 	public int insertAncestor(String id, Ancestors a) {
 		// TODO Auto-generated method stub
 		Optional<Person> p = selectPersonById(id);
+		Optional<Person> aP = selectPersonById(a.getaID());
 		
 		if(p.isEmpty())
 			return 0;
 		
+		if(aP.isEmpty())
+			return 2;
+		
 		Person act = p.get();
+		
+		Person forDes = aP.get();
 		
 		act.getAncestors().add(a);
 		
 		userRepository.save(act);
+		
+		forDes.getDescendants().add(new Descendants(act.getPID(), "", "children"));
+		
+		userRepository.save(forDes);
 		
 		return 1;
 
@@ -205,15 +215,29 @@ public class PersonDataAccessService implements PersonDao {
 	@Override
 	public int insertDescendant(String id, Descendants d) {
 		Optional<Person> p = selectPersonById(id);
+		Optional<Person> aD = selectPersonById(d.getdID());
 		
 		if(p.isEmpty())
 			return 0;
 		
+		if(aD.isEmpty())
+			return 2;
+		
 		Person act = p.get();
+		
+		Person forAnc = aD.get();
 		
 		act.getDescendants().add(d);
 		
 		userRepository.save(act);
+		
+		if(act.getGender().toLowerCase().equals("male"))
+			forAnc.getAncestors().add(new Ancestors(act.getPID(), "", "father"));
+		
+		if(act.getGender().toLowerCase().equals("female"))
+			forAnc.getAncestors().add(new Ancestors(act.getPID(), "", "mother"));
+		
+		userRepository.save(forAnc);
 		
 		return 1;
 	}
@@ -221,15 +245,24 @@ public class PersonDataAccessService implements PersonDao {
 	@Override
 	public int insertSpouse(String id, Spouses s) {
 		Optional<Person> p = selectPersonById(id);
+		Optional<Person> aS = selectPersonById(s.getsID());
 		
 		if(p.isEmpty())
 			return 0;
 		
+		if(aS.isEmpty())
+			return 2;
+		
 		Person act = p.get();
+		Person forSpo = aS.get();
 		
 		act.getSpouses().add(s);
 		
 		userRepository.save(act);
+		
+		forSpo.getSpouses().add(new Spouses(act.getPID(), "", "spouse"));
+		
+		userRepository.save(forSpo);
 		
 		return 1;
 	}
@@ -311,25 +344,32 @@ public class PersonDataAccessService implements PersonDao {
 	@Override
 	public String insertPersonwithRelation(Person person, String relation, String relative) {
 		
-		String insertedPerson = insertPerson(person.getPID(), person);
+		// insertPerson(person.getPID(), person);
+		
+		Person temp = new Person(person.getPID(), person.getFname(), person.getLname(), person.getGender(), person.getDob(), person.getDod(), person.getLob(), person.getLod());
+		userRepository.save(temp);
+		
+		String insertedPerson = "PID: " + temp.getPID(); 
 		
 		String reLow = relation.toLowerCase();
 		
-		if(reLow.equals("grandfather") || reLow.equals("grandmother") || reLow.equals("mother") || reLow.equals("father")) {
+		if(reLow.equals("mother") || reLow.equals("father")) {
 			
 			Ancestors a = new Ancestors();
 			a.setRelation(relation);
 			a.setaID(relative);
-			int iA = insertAncestor(person.getPID(), a);
+			
+			int iA = insertAncestor(temp.getPID(), a);
+			
 			
 			if(iA == 0)
-				return insertedPerson + "\n" + "Failed : Ancestor profile absent, create ancestor profile first";
+				return insertedPerson + "\n" + "Failed : Person did not exist during inserting ancestor, however person profile is complete";
 			else
 				return insertedPerson + "\n" + "Successfully inserted ancestor";
 			
 		}
 		
-		else if(reLow.equals("children") || reLow.equals("grandchildren")) {
+		else if(reLow.equals("children")) {
 			
 			Descendants d = new Descendants();
 			d.setRelation(relation);
@@ -337,7 +377,7 @@ public class PersonDataAccessService implements PersonDao {
 			int iD = insertDescendant(person.getPID(), d);
 			
 			if(iD == 0)
-				return insertedPerson + "\n" + "Failed : Descendant profile absent, create descendant profile first";
+				return insertedPerson + "\n" + "Failed : Person did not exist during inserting desc, however person profile is complete";
 			else
 				return insertedPerson + "\n" + "Successfully inserted descendant";
 			
@@ -351,7 +391,7 @@ public class PersonDataAccessService implements PersonDao {
 			int iS = insertSpouse(person.getPID(), s);
 			
 			if(iS == 0)
-				return insertedPerson + "\n" + "Failed : Spouse profile absent, create spouse profile first";
+				return insertedPerson + "\n" + "Failed : Person did not exist during inserting spou, however person profile is complete";
 			else
 				return insertedPerson + "\n" + "Successfully inserted spouse";
 			
@@ -376,6 +416,19 @@ public class PersonDataAccessService implements PersonDao {
 		userRepository.save(act);
 		
 		return "Successfully added sketch";
+	}
+
+	@Override
+	public List<lifeSketch> selectAllLsById(String id) {
+		
+		Optional<Person> p = selectPersonById(id);
+		
+		if(p.isEmpty())
+			return null;
+		
+		Person act = p.get();
+		
+		return act.getlSketch();
 	}
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.familytree.backend.model.*;
@@ -79,6 +80,11 @@ public class PersonController {
 		return personService.insertLifeSketch(pid, ls);
 	}
 	
+	@PostMapping(path = "exists") 
+	public searchName searchPerson(@RequestBody searchName names) {
+		return personService.searchPerson(names);
+	}
+	
 	@GetMapping
 	public List<Person> getAllPeople() {
 		return personService.getAllPeople();
@@ -109,9 +115,9 @@ public class PersonController {
 		return personService.getTree(id);
 	}
 	
-	@GetMapping(path = "exists") 
-	public searchName searchPerson(@RequestBody searchName names) {
-		return personService.searchPerson(names);
+	@GetMapping(path = "lifesketch/{pid}")
+	public List<lifeSketch> getLifeSketch(@PathVariable("pid") String id){
+		return personService.getLifeSketch(id);
 	}
 	
 	@DeleteMapping(path = "{pid}")
