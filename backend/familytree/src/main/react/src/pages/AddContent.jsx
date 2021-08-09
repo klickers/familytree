@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom'
 
+import S3 from 'react-aws-s3'
+
+/* Setting up React S3 Client */
+const config = {
+    bucketName: 'ftfamtree',
+    dirName: 'files',
+    region: 'us-east-2',
+    accessKeyId: 'AKIAWVA6Y27KRMZMV6F6',
+    secretAccessKey: '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'
+}
+const ReactS3Client = new S3(config)
+
 function AddContent() {
 
     const { pid } = useParams()
 
     const [state, setState] = useState({
         sPid: pid, 
-        title: '', 
-        content: '', 
+        mediaLink: null,
+        description: '', 
         date: ''
     });
+
+    function handleFileChange (event) {
+        setState(prevState => {
+            return {...prevState, [event.target.name]: event.target.files[0]};
+        });
+    }
 
     function handleChange (event) {
         setState(prevState => {
@@ -19,11 +37,19 @@ function AddContent() {
     }
 
     function handleSubmit (event) {
-        alert('A form was submitted: ' + state);
+
+        let time = new Date().getTime()
+
+        ReactS3Client
+            .uploadFile(state.mediaLink, state.mediaLink.name + time)
+            .then(data => {
+                state.mediaLink = data.location
+            })
+            .catch(err => console.error(err))
 
         console.log(JSON.stringify(state))
 
-        fetch(`/api/v1/person`, 
+        fetch(`/api/v1/person/lifesketch/${pid}`, 
             {
                 method: 'POST',
                 // We convert the React state to JSON and send it as the POST body
@@ -33,13 +59,12 @@ function AddContent() {
                 },
             }).then(function(response) {
                 console.log(response)
-                window.location.href = '/'
             });
 
         event.preventDefault();
     }
   
-    const { sPid, title, content, date } = state;
+    const { sPid, title, description, date } = state;
     return (
         <div className="addContent">
 
@@ -62,8 +87,14 @@ function AddContent() {
                         placeholder="Title"
                         value={title}  
                         onChange={handleChange} />
-                    <textarea name="content" placeholder="Start typing . . .">
-                        {content}
+                    <input 
+                        type="file" 
+                        name="mediaLink"
+                        onChange={handleFileChange} />
+                    <textarea 
+                        name="description" 
+                        placeholder="Add a caption or description . . .">
+                        {description}
                     </textarea>
                     <input 
                         type="text" 
@@ -71,10 +102,10 @@ function AddContent() {
                         placeholder="Date"
                         value={date}  
                         onChange={handleChange} />
-                    <button type="submit">+ Add Content</button>
+                    <button type="submit">+ Upload Content</button>
                 </form>
             </div>
-            
+
         </div>
     );
 }

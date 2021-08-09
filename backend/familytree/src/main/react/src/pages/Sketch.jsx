@@ -2,7 +2,20 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 function Sketch() {
-    const [person, setPerson] = useState([])
+    const [person, setPerson] = useState({
+        pid: '',
+        fname: '',
+        lname: '',
+        gender: '',
+        dob: '',
+        dod: '',
+        lob: '',
+        lod: '',
+        ancestors: [],
+        descendants: [],
+        spouses: [],
+        lSketch: []
+    })
     const { pid } = useParams()
 
     useEffect(() => {
@@ -10,9 +23,40 @@ function Sketch() {
             .then(res => res.json())
             .then((result) => {
                     setPerson(result)
-                    console.log(result)  // get rid of
+                    console.log(result.lSketch)  // get rid of
                 })
     }, [])
+
+    let content 
+
+    if (!person.lSketch.length) {
+        content = <p>Loading...</p>
+    }
+    else {
+        content = (
+            <div className="container">
+                <div className="container__line"></div>
+                <ul className="container__items">
+
+                    {person.lSketch.map(ls => (
+                        <li className="container__item">
+                            <div className="container__top">
+                                <div className="container__circle"></div>
+                                <div className="container__title">
+                                    {ls.title}: {ls.date}
+                                </div>
+                            </div>
+                            <div className="container__desc">
+                                <img src={ls.mediaLink} />
+                                {ls.description}
+                            </div>
+                        </li>
+                    ))}
+
+                </ul>
+            </div>
+        )
+    }
 
     return (
         <div className="sketch">
@@ -29,36 +73,7 @@ function Sketch() {
                 <Link to={`/add-content/${person.pid}`} style={{ marginBottom: '2em' }}>
                     + Add Content
                 </Link>
-                <div className="container">
-                    <div className="container__line"></div>
-                    <ul className="container__items">
-
-                        <li className="container__item">
-                            <div className="container__top">
-                                <div className="container__circle"></div>
-                                <div className="container__title">
-                                    TITLE: DATE
-                                </div>
-                            </div>
-                            <div className="container__desc">
-                                some long CONTENT here
-                            </div>
-                        </li>
-
-                        <li className="container__item">
-                            <div className="container__top">
-                                <div className="container__circle"></div>
-                                <div className="container__title">
-                                    Some Date:  Born
-                                </div>
-                            </div>
-                            <div className="container__desc">
-                                something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum something long like lorem ipsum
-                            </div>
-                        </li>
-
-                    </ul>
-                </div>
+                {content}
             </div>
         </div>
     );

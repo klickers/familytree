@@ -416,6 +416,9 @@ li.tree-diagram__root::before {
 .container__desc {
     /* Make it align with the title */
     margin-left: 2em;
+    img {
+        width: 100%;
+    }
 }
 
 
