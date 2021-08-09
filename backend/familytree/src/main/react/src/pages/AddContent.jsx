@@ -41,26 +41,27 @@ function AddContent() {
         let time = new Date().getTime()
 
         ReactS3Client
-            .uploadFile(state.mediaLink, state.mediaLink.name + time)
+            .uploadFile(state.mediaLink, state.mediaLink.name+time.toString())
             .then(data => {
+                state.mediaLink = null
                 state.mediaLink = data.location
+                console.log(state)
+                fetch(`/api/v1/person/lifesketch/${pid}`, 
+                    {
+                        method: 'POST',
+                        // We convert the React state to JSON and send it as the POST body
+                        body: JSON.stringify(state),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                    .then(res => res.text())
+                    .then(function(response) {
+                        console.log(response)
+                        window.location.href = `/sketch/${pid}`
+                    });
             })
-            .catch(err => console.error(err))
-
-        console.log(JSON.stringify(state))
-
-        fetch(`/api/v1/person/lifesketch/${pid}`, 
-            {
-                method: 'POST',
-                // We convert the React state to JSON and send it as the POST body
-                body: JSON.stringify(state),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            }).then(function(response) {
-                console.log(response)
-            });
-
+        
         event.preventDefault();
     }
   
@@ -93,8 +94,9 @@ function AddContent() {
                         onChange={handleFileChange} />
                     <textarea 
                         name="description" 
+                        value={description}
+                        onChange={handleChange}
                         placeholder="Add a caption or description . . .">
-                        {description}
                     </textarea>
                     <input 
                         type="text" 
